@@ -83,11 +83,18 @@
 7. В BIOS/UEFI есть пункт `MSR Lock Control` и изменение значения на `Disable` (изначально стоит `Enable`), позволяет не включать квирки `AppleCpuPmCfgLock` и `AppleXcpmCfgLock`
    - В BIOS/UEFI при выделении этого пункта сбоку написано "Enable - MSR 3Ah, MSR 0E2h and CSR 80h will locked. Power Good reset needed to remove lock bits"
 8. Без использования квирка `AppleXcpmExtraMsrs` macoS Monterey не грузится
-9. Столкнулся с той же проблемой, что и на платформе x79. При запуске Windows - она запускается только с 4 раза если запускать ее после перезапуска из macOS
+9. ~~Столкнулся с той же проблемой, что и на платформе x79. При запуске Windows - она запускается только с 4 раза если запускать ее после перезапуска из macOS~~
    - https://github.com/acidanthera/bugtracker/issues/2184
    - https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-806#post-1023286
    - Надеюсь это можно исправить использованием Clover
      - Попробовал в Clover 5150 на основе [этого EFI](https://github.com/Andrej-Antipov/X99-K9-Machinist-Hackintosh/blob/main/Clover-5150-Ventura-X99K9-iEngeneer.zip) - проблема с запуском Windows после macOS Monterey повторилась
+     - Проверил, использование Clover не исправляет эту проблему
+   - РЕШЕНО. Проблема из-за установленного драйвера "Series C220". Если его не устанавливать (без разницы откуда, хоть из SDI, хоть из центра обновлений Windows), то, вроде бы, Windows запускается нормально. Подробнее об экспериментах по ссылкам ниже
+     - https://applelife.ru/threads/clover.42089/page-1511#post-1023382
+     - https://github.com/acidanthera/bugtracker/issues/2184#issuecomment-1358762964
+     - https://github.com/acidanthera/bugtracker/issues/2184#issuecomment-1359074912
+     - https://github.com/acidanthera/bugtracker/issues/2184#issuecomment-1359119630
+     - https://www.insanelymac.com/forum/topic/355090-loading-windows-broken-after-reboot-from-macos-monterey
 10. При создании отчета в AIDA64 (последняя версия 6.85.6300 Extreme) система полностью зависает на этапе "Debug - PCI", который отображается в левом нижнем углу окна. Поэтому отчет из AIDA64 сделать мне не получилось
     - Естественно перед этим она зависала на этапе сканирования датчиков, но отключение пункта Строка состояния -> HWMon Modules -> PCH / Bibxy, позволила продвинуться дальше датчиков
 
